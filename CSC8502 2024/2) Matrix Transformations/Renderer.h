@@ -12,7 +12,7 @@ public:
     
     void SwitchToPerspective();
     void SwitchToOrthographic();
-    //virtual void UpdateScene(float dt);
+    virtual void UpdateScene(float dt);
     
     inline void SetScale(float s) { scale = s; }
     inline void SetRotation(float r) { rotation = r; }
@@ -21,7 +21,7 @@ public:
  protected:
      Mesh * triangle;
      Shader * matrixShader;
-     //Camera* camera;
+     Camera* camera;
      float scale;
      float rotation;
      Vector3 position;

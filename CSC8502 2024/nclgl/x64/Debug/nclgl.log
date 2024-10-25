@@ -1,2 +1,18 @@
-﻿  Mesh.cpp
-  nclgl.vcxproj -> H:\testprograms\CSC8502 2024\x64\Debug\nclgl.lib
+﻿  glad.c
+  Camera.cpp
+  ComputeShader.cpp
+  GameTimer.cpp
+  Keyboard.cpp
+  Matrix2.cpp
+  Matrix3.cpp
+  Matrix4.cpp
+  Mesh.cpp
+  MeshAnimation.cpp
+  MeshMaterial.cpp
+  Mouse.cpp
+  OGLRenderer.cpp
+  Quaternion.cpp
+  Shader.cpp
+  Window.cpp
+  Generating Code...
+  nclgl.vcxproj -> H:\testprograms\GITREPO\OpenGL-Basics\CSC8502 2024\x64\Debug\nclgl.lib

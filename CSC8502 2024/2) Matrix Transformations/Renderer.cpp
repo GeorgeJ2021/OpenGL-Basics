@@ -2,8 +2,7 @@
 
 Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	triangle = Mesh::GenerateTriangle();
-	
-	
+	camera = new Camera;
 	matrixShader = new Shader("MatrixVertex.glsl","colourFragment.glsl");
 	
 	 if (!matrixShader->LoadSuccess()) {
@@ -29,6 +28,11 @@ void Renderer::SwitchToOrthographic() {
 	projMatrix = Matrix4::Orthographic(-1.0f, 10000.0f, width / 2.0f, -width / 2.0f, height / 2.0f, -height / 2.0f);
 }
 
+void Renderer::UpdateScene(float dt) {
+	camera->UpdateCamera(dt);
+	viewMatrix = camera->BuildViewMatrix();
+}
+
 void Renderer::RenderScene() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	BindShader(matrixShader);
@@ -49,8 +53,5 @@ void Renderer::RenderScene() {
 	}
 	
 }
-/*void Renderer::UpdateScene(float dt) {
-	camera -> UpdateCamera(dt);
-	viewMatrix = camera -> BuildViewMatrix();
-}*/
+
 
