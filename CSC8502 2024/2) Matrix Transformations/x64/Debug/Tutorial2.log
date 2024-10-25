@@ -1,2 +1,5 @@
-﻿  tutorial2.cpp
+﻿  Renderer.cpp
+  tutorial2.cpp
+  Generating Code...
+  LINK : H:\testprograms\GITREPO\OpenGL-Basics\CSC8502 2024\x64\Debug\Tutorial 02 - Matrix transformations.exe not found or not built by the last incremental link; performing full link
   Tutorial2.vcxproj -> H:\testprograms\GITREPO\OpenGL-Basics\CSC8502 2024\x64\Debug\Tutorial 02 - Matrix transformations.exe

@@ -171,6 +171,15 @@ void OGLRenderer::Resize(int x, int y)	{
 	glViewport(0,0,width,height);
 }
 
+void OGLRenderer::SetTextureRepeating(GLuint target, bool repeating) {
+	glBindTexture(GL_TEXTURE_2D, target);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, repeating ? GL_REPEAT : GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeating ? GL_REPEAT : GL_CLAMP);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+
+
 /*
 Swaps the buffers, ready for the next frame's rendering. Should be called
 every frame, at the end of RenderScene(), or whereever appropriate for

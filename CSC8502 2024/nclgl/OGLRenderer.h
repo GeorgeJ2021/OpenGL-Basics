@@ -60,6 +60,7 @@ public:
 protected:
 	virtual void	Resize(int x, int y);	
 	void			UpdateShaderMatrices();
+	void SetTextureRepeating(GLuint target, bool state);
 	void			BindShader(Shader*s);
 
 	void StartDebugGroup(const std::string& s) {
