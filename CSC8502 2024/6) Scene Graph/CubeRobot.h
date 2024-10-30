@@ -11,6 +11,5 @@ class CubeRobot : public SceneNode
 		SceneNode * head;
 		SceneNode * leftArm;
 		SceneNode * rightArm;
-
 };
 
