@@ -1,21 +1,7 @@
-﻿  glad.c
-  Camera.cpp
-  ComputeShader.cpp
-  Frustum.cpp
-  GameTimer.cpp
-  Keyboard.cpp
-  Matrix2.cpp
-  Matrix3.cpp
-  Matrix4.cpp
-  Mesh.cpp
-  MeshAnimation.cpp
-  MeshMaterial.cpp
-  Mouse.cpp
-  OGLRenderer.cpp
-  Plane.cpp
-  Quaternion.cpp
-  SceneNode.cpp
-  Shader.cpp
-  Window.cpp
-  Generating Code...
-  nclgl.vcxproj -> H:\testprograms\GITREPO\OpenGL-Basics\CSC8502 2024\x64\Debug\nclgl.lib
+﻿  HeightMap.cpp
+D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\nclgl\HeightMap.cpp(10,11): warning C4129: ' ': unrecognized character escape sequence
+D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\nclgl\HeightMap.cpp(23,48): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\nclgl\HeightMap.cpp(23,31): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\nclgl\HeightMap.cpp(24,39): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\nclgl\HeightMap.cpp(24,36): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+  nclgl.vcxproj -> D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\x64\Debug\nclgl.lib
