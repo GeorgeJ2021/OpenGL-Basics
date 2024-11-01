@@ -7,7 +7,7 @@ HeightMap::HeightMap(const std::string& name) {
 	int iWidth, iHeight, iChans;
 	unsigned char* data = SOIL_load_image(name.c_str(), &iWidth, &iHeight, &iChans, 1);
 	if (!data) {
-		cout << " Heightmap can ’t load file !\ n ";
+		cout << " Heightmap can ’t load file !\n ";
 		return;
 	}
 	numVertices = iWidth * iHeight;
