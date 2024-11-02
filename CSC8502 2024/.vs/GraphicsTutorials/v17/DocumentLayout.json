@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5844D912-7DC1-4A49-9F98-F7FE1C053563}|8) Index Buffers\\Tutorial8.vcxproj|D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\8) Index Buffers\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5844D912-7DC1-4A49-9F98-F7FE1C053563}|8) Index Buffers\\Tutorial8.vcxproj|solutionrelative:8) Index Buffers\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{95F93172-8DC5-4E52-80B6-0D56624BD569}|11) Per Fragment Lighting A\\Tutorial11.vcxproj|D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\11) Per Fragment Lighting A\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{95F93172-8DC5-4E52-80B6-0D56624BD569}|11) Per Fragment Lighting A\\Tutorial11.vcxproj|solutionrelative:11) Per Fragment Lighting A\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5844D912-7DC1-4A49-9F98-F7FE1C053563}|8) Index Buffers\\Tutorial8.vcxproj|D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\8) Index Buffers\\tutorial8.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5844D912-7DC1-4A49-9F98-F7FE1C053563}|8) Index Buffers\\Tutorial8.vcxproj|solutionrelative:8) Index Buffers\\tutorial8.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{95F93172-8DC5-4E52-80B6-0D56624BD569}|11) Per Fragment Lighting A\\Tutorial11.vcxproj|D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\11) Per Fragment Lighting A\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{95F93172-8DC5-4E52-80B6-0D56624BD569}|11) Per Fragment Lighting A\\Tutorial11.vcxproj|solutionrelative:11) Per Fragment Lighting A\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5844D912-7DC1-4A49-9F98-F7FE1C053563}|8) Index Buffers\\Tutorial8.vcxproj|D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\8) Index Buffers\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5844D912-7DC1-4A49-9F98-F7FE1C053563}|8) Index Buffers\\Tutorial8.vcxproj|solutionrelative:8) Index Buffers\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{95F93172-8DC5-4E52-80B6-0D56624BD569}|11) Per Fragment Lighting A\\Tutorial11.vcxproj|D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\11) Per Fragment Lighting A\\Tutorial11.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{95F93172-8DC5-4E52-80B6-0D56624BD569}|11) Per Fragment Lighting A\\Tutorial11.vcxproj|solutionrelative:11) Per Fragment Lighting A\\Tutorial11.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D6B51B-CB0A-4389-ADC6-24082B967C3F}|nclgl\\nclgl.vcxproj|D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\OGLRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{98D6B51B-CB0A-4389-ADC6-24082B967C3F}|nclgl\\nclgl.vcxproj|solutionrelative:nclgl\\OGLRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D6B51B-CB0A-4389-ADC6-24082B967C3F}|nclgl\\nclgl.vcxproj|D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\OGLRenderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{98D6B51B-CB0A-4389-ADC6-24082B967C3F}|nclgl\\nclgl.vcxproj|solutionrelative:nclgl\\OGLRenderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D6B51B-CB0A-4389-ADC6-24082B967C3F}|nclgl\\nclgl.vcxproj|D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\Light.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{98D6B51B-CB0A-4389-ADC6-24082B967C3F}|nclgl\\nclgl.vcxproj|solutionrelative:nclgl\\Light.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D6B51B-CB0A-4389-ADC6-24082B967C3F}|nclgl\\nclgl.vcxproj|D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\Light.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{98D6B51B-CB0A-4389-ADC6-24082B967C3F}|nclgl\\nclgl.vcxproj|solutionrelative:nclgl\\Light.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{98D6B51B-CB0A-4389-ADC6-24082B967C3F}|nclgl\\nclgl.vcxproj|D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\HeightMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -42,97 +58,146 @@
       "DocumentGroups": [
         {
           "DockedWidth": 320,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "tutorial8.cpp",
-              "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\8) Index Buffers\\tutorial8.cpp",
-              "RelativeDocumentMoniker": "8) Index Buffers\\tutorial8.cpp",
-              "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\8) Index Buffers\\tutorial8.cpp",
-              "RelativeToolTip": "8) Index Buffers\\tutorial8.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-30T20:12:26.411Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Renderer.cpp",
-              "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\8) Index Buffers\\Renderer.cpp",
-              "RelativeDocumentMoniker": "8) Index Buffers\\Renderer.cpp",
-              "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\8) Index Buffers\\Renderer.cpp",
-              "RelativeToolTip": "8) Index Buffers\\Renderer.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAANAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\11) Per Fragment Lighting A\\Renderer.cpp",
+              "RelativeDocumentMoniker": "11) Per Fragment Lighting A\\Renderer.cpp",
+              "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\11) Per Fragment Lighting A\\Renderer.cpp",
+              "RelativeToolTip": "11) Per Fragment Lighting A\\Renderer.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-30T20:29:54.94Z",
+              "WhenOpened": "2024-11-02T19:08:28.937Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Renderer.h",
-              "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\8) Index Buffers\\Renderer.h",
-              "RelativeDocumentMoniker": "8) Index Buffers\\Renderer.h",
-              "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\8) Index Buffers\\Renderer.h",
-              "RelativeToolTip": "8) Index Buffers\\Renderer.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAACAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\11) Per Fragment Lighting A\\Renderer.h",
+              "RelativeDocumentMoniker": "11) Per Fragment Lighting A\\Renderer.h",
+              "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\11) Per Fragment Lighting A\\Renderer.h",
+              "RelativeToolTip": "11) Per Fragment Lighting A\\Renderer.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-30T20:27:34.733Z"
+              "WhenOpened": "2024-11-02T19:06:39.368Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "OGLRenderer.cpp",
+              "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\OGLRenderer.cpp",
+              "RelativeDocumentMoniker": "nclgl\\OGLRenderer.cpp",
+              "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\OGLRenderer.cpp",
+              "RelativeToolTip": "nclgl\\OGLRenderer.cpp",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAAALAAAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-02T18:50:51.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OGLRenderer.h",
+              "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\OGLRenderer.h",
+              "RelativeDocumentMoniker": "nclgl\\OGLRenderer.h",
+              "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\OGLRenderer.h",
+              "RelativeToolTip": "nclgl\\OGLRenderer.h",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAEEAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-02T18:50:50.956Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Light.cpp",
+              "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\Light.cpp",
+              "RelativeDocumentMoniker": "nclgl\\Light.cpp",
+              "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\Light.cpp",
+              "RelativeToolTip": "nclgl\\Light.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-02T18:48:00.491Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Light.h",
+              "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\Light.h",
+              "RelativeDocumentMoniker": "nclgl\\Light.h",
+              "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\Light.h",
+              "RelativeToolTip": "nclgl\\Light.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-02T18:47:54.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Tutorial11.cpp",
+              "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\11) Per Fragment Lighting A\\Tutorial11.cpp",
+              "RelativeDocumentMoniker": "11) Per Fragment Lighting A\\Tutorial11.cpp",
+              "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\11) Per Fragment Lighting A\\Tutorial11.cpp",
+              "RelativeToolTip": "11) Per Fragment Lighting A\\Tutorial11.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-02T17:50:09.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "HeightMap.cpp",
               "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\HeightMap.cpp",
               "RelativeDocumentMoniker": "nclgl\\HeightMap.cpp",
               "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\HeightMap.cpp",
               "RelativeToolTip": "nclgl\\HeightMap.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAC4AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-30T20:20:24.192Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "HeightMap.h",
               "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\HeightMap.h",
               "RelativeDocumentMoniker": "nclgl\\HeightMap.h",
               "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\HeightMap.h",
               "RelativeToolTip": "nclgl\\HeightMap.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-10-30T20:18:47.493Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "Mesh.cpp",
               "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\Mesh.cpp",
               "RelativeDocumentMoniker": "nclgl\\Mesh.cpp",
               "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\Mesh.cpp",
               "RelativeToolTip": "nclgl\\Mesh.cpp",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAAADMAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAqwG4AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-29T11:26:30.7Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "Mesh.h",
               "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\Mesh.h",
               "RelativeDocumentMoniker": "nclgl\\Mesh.h",
               "ToolTip": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\Mesh.h",
               "RelativeToolTip": "nclgl\\Mesh.h",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAAADcAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAFYAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-10-29T11:26:30.701Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "Camera.h",
               "DocumentMoniker": "D:\\OpenGLBasics\\OpenGL-Basics\\CSC8502 2024\\nclgl\\Camera.h",
               "RelativeDocumentMoniker": "nclgl\\Camera.h",
