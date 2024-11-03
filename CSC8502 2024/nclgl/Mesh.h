@@ -118,6 +118,9 @@ protected:
 	Matrix4* bindPose;
 	Matrix4* inverseBindPose;
 
+	void GenerateTangents();
+	Vector4 GenerateTangent(int a, int b, int c);
+
 	std::vector<std::string>	jointNames;
 	std::vector<int>			jointParents;
 	std::vector< SubMesh>		meshLayers;
