@@ -28,6 +28,7 @@ class Renderer : public OGLRenderer
 	GLuint waterTex;
 	GLuint earthTex;
 	GLuint earthBump;
+	GLuint waterBump;
 	float waterRotate;
 	float waterCycle;
 
