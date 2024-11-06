@@ -11,8 +11,8 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	earthTex = SOIL_load_OGL_texture(TEXTUREDIR "sand.JPG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 	earthBump = SOIL_load_OGL_texture(TEXTUREDIR "sandnormal.JPG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 	waterBump = SOIL_load_OGL_texture(TEXTUREDIR "waterbump.PNG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
-	cubeMap = SOIL_load_OGL_cubemap(TEXTUREDIR "lebron.jpg", TEXTUREDIR "rusted_east.jpg", TEXTUREDIR "cubemap_2.png", TEXTUREDIR "rusted_down.jpg",
-		TEXTUREDIR "rusted_south.jpg", TEXTUREDIR "eva.jpg", SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
+	cubeMap = SOIL_load_OGL_cubemap(TEXTUREDIR "cubemap_4.png", TEXTUREDIR "cubemap_5.png", TEXTUREDIR "cubemap_up.png", TEXTUREDIR "cubemap_down.png",
+		TEXTUREDIR "cubemap_1.png", TEXTUREDIR "cubemap_0.png", SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
 	if (!earthTex || !earthBump || !cubeMap || !waterTex) {
 		return;
 
