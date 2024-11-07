@@ -27,7 +27,7 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	sceneMeshes.emplace_back(Mesh::GenerateQuad());
-	sceneMeshes.emplace_back(Mesh::LoadFromMeshFile("Sphere.msh"));
+	sceneMeshes.emplace_back(Mesh::LoadFromMeshFile("EVAtest2.msh"));
 	sceneMeshes.emplace_back(Mesh::LoadFromMeshFile("Cylinder.msh"));
 	sceneMeshes.emplace_back(Mesh::LoadFromMeshFile("Cone.msh"));
 	sceneDiffuse = SOIL_load_OGL_texture(TEXTUREDIR "Barren Reds.JPG",SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
