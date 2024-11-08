@@ -1,4 +1,2 @@
 ﻿  BlankProject.cpp
-  Renderer.cpp
-  Generating Code...
-LINK : fatal error LNK1104: cannot open file 'nclgl.lib'
+  BlankProject.vcxproj -> H:\testprograms\GITREPO\OpenGL-Basics\CSC8502 2024\x64\Debug\Blank Project.exe
