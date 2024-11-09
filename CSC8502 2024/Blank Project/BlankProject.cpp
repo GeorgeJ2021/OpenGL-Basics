@@ -18,7 +18,7 @@ int main()	{
 	while(w.UpdateWindow()  && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)){
 		renderer.UpdateScene(w.GetTimer()->GetTimeDeltaSeconds());
 		if (Window::GetKeyboard() -> KeyTriggered(KEYBOARD_T)) {
-			renderer.ToggleScene();
+			renderer.StartFlash();
 		}
 		renderer.RenderScene();
 		renderer.SwapBuffers();

@@ -1,5 +1,1 @@
-﻿  Camera.cpp
-D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\nclgl\Camera.cpp(14,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\nclgl\Camera.cpp(90,59): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\nclgl\Camera.cpp(91,38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  nclgl.vcxproj -> D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\x64\Debug\nclgl.lib
+﻿  nclgl.vcxproj -> D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\x64\Debug\nclgl.lib

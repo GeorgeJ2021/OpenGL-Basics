@@ -7,12 +7,9 @@
 Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	quad = Mesh::GenerateQuad();
 	heightMap = new HeightMap(TEXTUREDIR "noise4.png");
-	//waterTex = SOIL_load_OGL_texture(TEXTUREDIR "redfanta.tga", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 	earthTex = SOIL_load_OGL_texture(TEXTUREDIR "sand.JPG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 	earthBump = SOIL_load_OGL_texture(TEXTUREDIR "sandnormal.JPG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 	waterBump = SOIL_load_OGL_texture(TEXTUREDIR "waterbump.PNG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
-	//cubeMap = SOIL_load_OGL_cubemap(TEXTUREDIR "cubemap_4.png", TEXTUREDIR "cubemap_5.png", TEXTUREDIR "cubemap_up.png", TEXTUREDIR "cubemap_down.png",
-		//TEXTUREDIR "cubemap_1.png", TEXTUREDIR "cubemap_0.png", SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
 
 	daySkybox = SOIL_load_OGL_cubemap(TEXTUREDIR "dayleft.png", TEXTUREDIR "dayright.png", TEXTUREDIR "daytop.png", TEXTUREDIR "daybottom.png",
 		TEXTUREDIR "dayback.png", TEXTUREDIR "dayfront.png", SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
@@ -25,7 +22,6 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 
 	if (!earthTex || !earthBump || !daySkybox || !nightSkybox || !dayWaterTex || !nightWaterTex) {
 		return;
-
 	}
 	SetTextureRepeating(earthTex, true);
 	SetTextureRepeating(earthBump, true);
@@ -35,6 +31,7 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	reflectShader = new Shader("reflectVertex.glsl", "reflectFragment.glsl");
 	skyboxShader = new Shader("skyboxVertex.glsl", "skyboxFragment.glsl");
 	lightShader = new Shader("PerPixelVertex.glsl", "PerPixelFragment.glsl");
+	flashShader = new Shader("fadeVertex.glsl", "fadeFragment.glsl");
 	if (!reflectShader->LoadSuccess() || !skyboxShader->LoadSuccess() || !lightShader->LoadSuccess()) {
 		return;
 	}
@@ -55,12 +52,10 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 	waterRotate = 0.0f;
 	waterCycle = 0.0f;
+	flashIntensity = 0.0f;
+	isFlashing = false;
 	init = true;
 
-}
-
-void Renderer::ToggleScene() {
-	change = !change;
 }
 
 Renderer ::~Renderer(void) {
@@ -73,6 +68,7 @@ Renderer ::~Renderer(void) {
 	glDeleteTextures(1, &dayWaterTex);
 	glDeleteTextures(1, &nightWaterTex);
 
+	delete flashShader;
 	delete dayLight;
 	delete nightLight;
 	delete reflectShader;
@@ -87,6 +83,18 @@ void Renderer::UpdateScene(float dt) {
 	waterRotate += dt * 2.0f;
 	waterCycle += dt * 0.25f;
 
+	if (isFlashing) {
+		flashIntensity += dt * 2.0f;   // Adjust the multiplier for flash speed
+		if (flashIntensity >= 1.0f) {
+			flashIntensity = 1.0f;
+			isFlashing = false; 
+			change = !change;
+		}
+	}
+	else if (flashIntensity > 0.0f) {
+		flashIntensity = std::max(flashIntensity - dt * 2.0f, 0.0f); 
+	}
+
 }
 
 void Renderer::RenderScene() {
@@ -95,6 +103,7 @@ void Renderer::RenderScene() {
 	DrawSkybox();
 	DrawHeightmap();
 	DrawWater();
+	DrawFlash();
 }
 
 void Renderer::DrawSkybox() {
@@ -151,27 +160,19 @@ void Renderer::DrawWater() {
 	quad->Draw();
 }
 
-/*
-void Renderer::LoadScene1() {
-	waterTex =SOIL_load_OGL_texture(TEXTUREDIR "water.TGA", SOIL_LOAD_AUTO,SOIL_CREATE_NEW_ID,SOIL_FLAG_MIPMAPS);
-	earthTex = SOIL_load_OGL_texture(TEXTUREDIR "Barren Reds.JPG", SOIL_LOAD_AUTO,SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
-	earthBump = SOIL_load_OGL_texture(TEXTUREDIR "Barren RedsDOT3.JPG", SOIL_LOAD_AUTO,SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
-	cubeMap = SOIL_load_OGL_cubemap(TEXTUREDIR "rusted_west.jpg", TEXTUREDIR "rusted_east.jpg",TEXTUREDIR "rusted_up.jpg", TEXTUREDIR "rusted_down.jpg",
-			TEXTUREDIR "rusted_south.jpg", TEXTUREDIR "rusted_north.jpg",SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
-	if(!earthTex || !earthBump || !cubeMap || !waterTex) {
-		return;
-	}
+void Renderer::DrawFlash() {
+	if (flashIntensity <= 0.0f) return;  
+	glDisable(GL_DEPTH_TEST);  
+
+	BindShader(flashShader);
+	glUniform1f(glGetUniformLocation(flashShader->GetProgram(), "flashIntensity"), flashIntensity);
+
+	quad->Draw();  
+
+	glEnable(GL_DEPTH_TEST);
 }
 
-void Renderer::LoadScene2() {
-	waterTex = SOIL_load_OGL_texture(TEXTUREDIR "redfanta.tga", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
-	earthTex = SOIL_load_OGL_texture(TEXTUREDIR "sand.JPG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
-	earthBump = SOIL_load_OGL_texture(TEXTUREDIR "sandnormal.JPG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
-	waterBump = SOIL_load_OGL_texture(TEXTUREDIR "waterbump.PNG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
-	cubeMap = SOIL_load_OGL_cubemap(TEXTUREDIR "cubemap_4.png", TEXTUREDIR "cubemap_5.png", TEXTUREDIR "cubemap_up.png", TEXTUREDIR "cubemap_down.png",
-		TEXTUREDIR "cubemap_1.png", TEXTUREDIR "cubemap_0.png", SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
-	if (!earthTex || !earthBump || !cubeMap || !waterTex) {
-		return;
-
-	}
-} */
+void Renderer::StartFlash() {
+	flashIntensity = 0.0f;  
+	isFlashing = true;
+}

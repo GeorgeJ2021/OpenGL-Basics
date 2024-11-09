@@ -1,1 +1,4 @@
-﻿  BlankProject.vcxproj -> D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\x64\Debug\Blank Project.exe
+﻿  Renderer.cpp
+D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\Blank Project\Renderer.cpp(46,86): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\Blank Project\Renderer.cpp(46,81): warning C4305: 'argument': truncation from 'double' to 'float'
+  BlankProject.vcxproj -> D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\x64\Debug\Blank Project.exe

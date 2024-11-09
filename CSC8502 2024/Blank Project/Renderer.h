@@ -11,20 +11,20 @@ public:
 	bool change;
 	Renderer(Window& parent);
 	~Renderer(void);
-	void ToggleScene();
 	void RenderScene() override;
 	void UpdateScene(float dt) override;
+	void StartFlash();
 
 protected:
 	void DrawHeightmap();
 	void DrawWater();
 	void DrawSkybox();
-	void LoadScene1();
-	void LoadScene2();
+	void DrawFlash();
 	
 	Shader* lightShader;
 	Shader* reflectShader;
 	Shader* skyboxShader;
+	Shader* flashShader;
 	HeightMap* heightMap;
 	Mesh* quad;
 	Light* light;
@@ -38,6 +38,8 @@ protected:
 	GLuint dayWaterTex, nightWaterTex;
 	Light* dayLight;
 	Light* nightLight;
+	float flashIntensity;      
+	bool isFlashing;
 	float waterRotate;
 	float waterCycle;
 
