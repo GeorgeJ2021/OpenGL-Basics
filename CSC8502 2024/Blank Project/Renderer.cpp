@@ -38,8 +38,11 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	if (!reflectShader->LoadSuccess() || !skyboxShader->LoadSuccess() || !lightShader->LoadSuccess()) {
 		return;
 	}
+	Vector3 map = Vector3(0.5f, 1.0f, 0.4f);
 	Vector3 heightmapSize = heightMap->GetHeightmapSize();
-	camera = new Camera(0.0f, -180.0f, heightmapSize * Vector3(0.5f, 1.0f, 0.4f));
+	camera = new Camera(0.0f, -180.0f, heightmapSize * map);
+	camera->settrack(map, heightmapSize);
+
 	//light = new Light(heightmapSize * Vector3(1.5f, 4.0f, 0.5f), Vector4(0.8, 0.6, 1, 1), heightmapSize.x * 2);
 
 	dayLight = new Light(heightmapSize * Vector3(0.5f, 10.0f, 0.5f), Vector4(1.0, 1.0, 1.0, 1), heightmapSize.x * 10.0f);
@@ -88,6 +91,7 @@ void Renderer::UpdateScene(float dt) {
 
 void Renderer::RenderScene() {
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
 	DrawSkybox();
 	DrawHeightmap();
 	DrawWater();
