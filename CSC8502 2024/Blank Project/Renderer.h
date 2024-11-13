@@ -1,6 +1,7 @@
 #pragma once
 #include "../nclgl/OGLRenderer.h"
-
+#include "../nclgl/MeshMaterial.h"
+#include "../nclgl/MeshAnimation.h"
 class Camera;
 class Shader;
 class HeightMap;
@@ -20,7 +21,15 @@ protected:
 	void DrawWater();
 	void DrawSkybox();
 	void DrawFlash();
+	void LoadMesh(Mesh* mesh, MeshMaterial* material);
+	void DrawMesh(Mesh* mesh, MeshMaterial* material, Vector3 meshPosition, Vector3 meshScale, Vector3 meshRotation);
 	
+	Mesh* m;
+	MeshMaterial* mat;
+	Mesh* EVA1;
+	MeshMaterial* EVAmat;
+	MeshAnimation* anim;
+	Shader* Meshshader;	
 	Shader* lightShader;
 	Shader* reflectShader;
 	Shader* skyboxShader;
@@ -42,5 +51,10 @@ protected:
 	bool isFlashing;
 	float waterRotate;
 	float waterCycle;
+	Vector3 meshPosition;
+	Vector3 meshScale;
+	Vector3 meshRotation;
+	Vector3 heightmapSize;
+	vector <GLuint> matTextures;
 
 };

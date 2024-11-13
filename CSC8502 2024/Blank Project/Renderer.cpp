@@ -32,14 +32,30 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	skyboxShader = new Shader("skyboxVertex.glsl", "skyboxFragment.glsl");
 	lightShader = new Shader("PerPixelVertex.glsl", "PerPixelFragment.glsl");
 	flashShader = new Shader("fadeVertex.glsl", "fadeFragment.glsl");
-	if (!reflectShader->LoadSuccess() || !skyboxShader->LoadSuccess() || !lightShader->LoadSuccess()) {
+	Meshshader = new Shader("TexturedVertex.glsl", "texturedFragment.glsl");
+	if (!reflectShader->LoadSuccess() || !skyboxShader->LoadSuccess() || !lightShader->LoadSuccess() || !Meshshader->LoadSuccess()) {
 		return;
 	}
 	Vector3 map = Vector3(0.5f, 1.0f, 0.4f);
-	Vector3 heightmapSize = heightMap->GetHeightmapSize();
+	heightmapSize = heightMap->GetHeightmapSize();
 	camera = new Camera(0.0f, -180.0f, heightmapSize * map);
 	camera->settrack(map, heightmapSize);
 
+	m = Mesh::LoadFromMeshFile("Rock1.msh");
+	mat = new MeshMaterial("Rock1.mat");
+
+	EVA1 = Mesh::LoadFromMeshFile("EVA01.msh");
+	EVAmat = new MeshMaterial("EVA01.mat");
+	//anim = new MeshAnimation("EVA01.anm");
+
+	// Load textures from material file
+	//LoadMesh(m, mat);
+	LoadMesh(EVA1, EVAmat);
+
+	// Set mesh position on the heightmap
+	/*meshPosition = heightmapSize * Vector3(0.5f, 0.28f, 0.8f);
+	Vector3 meshScale = Vector3(100.0f, 100.0f, 100.0f);
+	Vector3 meshRotation = Vector3(0, 1, 0);*/
 	//light = new Light(heightmapSize * Vector3(1.5f, 4.0f, 0.5f), Vector4(0.8, 0.6, 1, 1), heightmapSize.x * 2);
 
 	dayLight = new Light(heightmapSize * Vector3(0.5f, 10.0f, 0.5f), Vector4(1.0, 1.0, 1.0, 1), heightmapSize.x * 10.0f);
@@ -75,6 +91,11 @@ Renderer ::~Renderer(void) {
 	delete skyboxShader;
 	delete lightShader;
 	delete light;
+	delete m;
+	delete mat;
+	delete EVA1;
+	delete EVAmat;
+	delete Meshshader;
 }
 
 void Renderer::UpdateScene(float dt) {
@@ -103,7 +124,14 @@ void Renderer::RenderScene() {
 	DrawSkybox();
 	DrawHeightmap();
 	DrawWater();
+	//DrawMesh(m, mat,heightmapSize * Vector3(0.6f, 0.63f, 0.2f), Vector3(100.0f, 100.0f, 100.0f), Vector3(0, 1, 0));
+	if (change == false)
+	{
+		DrawMesh(EVA1, EVAmat, heightmapSize * Vector3(0.5f, 0.28f, 0.8f), Vector3(100.0f, 100.0f, 100.0f), Vector3(0, 1, 0));
+		
+	}
 	DrawFlash();
+	
 }
 
 void Renderer::DrawSkybox() {
@@ -114,8 +142,27 @@ void Renderer::DrawSkybox() {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, currentSkybox);
 	quad->Draw();
+	/*if (currentSkybox == nightSkybox)
+	{
+		DrawMesh();
+	}*/
 	glDepthMask(GL_TRUE);
 }
+
+void Renderer::LoadMesh(Mesh* mesh, MeshMaterial* material)
+{
+	for (int i = 0; i < mesh->GetSubMeshCount(); ++i) {
+		const MeshMaterialEntry* matEntry = material->GetMaterialForLayer(i);
+		const string* filename = nullptr;
+		matEntry->GetEntry("Diffuse", &filename);
+		string path = TEXTUREDIR + *filename;
+		GLuint texID = SOIL_load_OGL_texture(path.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y);
+		matTextures.emplace_back(texID);
+	}
+
+}
+
+
 
 void Renderer::DrawHeightmap() {
 	BindShader(lightShader);
@@ -175,4 +222,39 @@ void Renderer::DrawFlash() {
 void Renderer::StartFlash() {
 	flashIntensity = 0.0f;  
 	isFlashing = true;
+}
+
+void Renderer::DrawMesh(Mesh* mesh, MeshMaterial* material, Vector3 meshPosition, Vector3 meshScale, Vector3 meshRotation) {
+	BindShader(lightShader);
+	//UpdateShaderMatrices();
+
+	//vector<Matrix4> frameMatrices;
+	//const Matrix4* invBindPose = mesh->GetInverseBindPose();
+
+	//// Use the first frame for a static pose
+	//const Matrix4* frameData = anim->GetJointData(0);  // First frame only
+
+	//for (unsigned int i = 0; i < mesh->GetJointCount(); ++i) {
+	//	frameMatrices.emplace_back(frameData[i] * invBindPose[i]);
+	//}
+
+	//int j = glGetUniformLocation(Meshshader->GetProgram(), "joints");
+	//glUniformMatrix4fv(j, frameMatrices.size(), false, (float*)frameMatrices.data()); 
+	//glUniformMatrix4fv(glGetUniformLocation(Meshshader->GetProgram(), "textureMatrix"), 1, false, (float*)&textureMatrix);
+	// Set mesh position on the heightmap
+	modelMatrix = Matrix4::Translation(meshPosition) * Matrix4::Scale(meshScale) * Matrix4::Rotation(180, meshRotation);
+	textureMatrix = Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f));
+	UpdateShaderMatrices();
+	
+	glUniform1i(glGetUniformLocation(Meshshader->GetProgram(), "diffuseTex"), 0);
+	//glUniform3fv(glGetUniformLocation(lightShader->GetProgram(), "cameraPos"), 1, (float*)&camera->GetPosition());
+	glUniform1i(glGetUniformLocation(lightShader->GetProgram(), "diffuseTex"), 0);
+	glUniform4f(glGetUniformLocation(lightShader->GetProgram(), "ambientLightColor"), 0.7f, 0.6f, 1.0f, 1.0f);
+
+	// Render each sub-mesh with its texture
+	for (int i = 0; i < mesh->GetSubMeshCount(); ++i) {
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, matTextures[i]);
+		mesh->DrawSubMesh(i);
+	}
 }

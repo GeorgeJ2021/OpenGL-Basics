@@ -12,9 +12,9 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	if (!shader->LoadSuccess()) {
 		return;
 	}
-	mesh = Mesh::LoadFromMeshFile("EVA01.msh");
-	anim = new MeshAnimation("EVA01.anm");
-	material = new MeshMaterial("EVA01.mat");
+	mesh = Mesh::LoadFromMeshFile("MASSEVA1.msh");
+	anim = new MeshAnimation("MASSEVA1.anm");
+	material = new MeshMaterial("MASSEVA1.mat");
 	for (int i = 0; i < mesh->GetSubMeshCount(); ++i) {
 		const MeshMaterialEntry* matEntry = material->GetMaterialForLayer(i);
 		const string* filename = nullptr;
