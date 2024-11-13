@@ -6,15 +6,15 @@
 Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	projMatrix = Matrix4::Perspective(1.0f, 10000.0f, (float)width / (float)height, 45.0f);
-	camera = new Camera(-3, 0.0f, Vector3(0, 1.4f, 4.0f));
+	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+	camera = new Camera(8,0.0f, Vector3(0, 1.4f, 7.0f));
 	shader = new Shader("SkinningVertex.glsl", "texturedFragment.glsl");
 	if (!shader->LoadSuccess()) {
 		return;
 	}
-	mesh = Mesh::LoadFromMeshFile("Role_T.msh");
-	anim = new MeshAnimation("Role_T.anm");
-	material = new MeshMaterial("Role_T.mat");
+	mesh = Mesh::LoadFromMeshFile("EVA01.msh");
+	anim = new MeshAnimation("EVA01.anm");
+	material = new MeshMaterial("EVA01.mat");
 	for (int i = 0; i < mesh->GetSubMeshCount(); ++i) {
 		const MeshMaterialEntry* matEntry = material->GetMaterialForLayer(i);
 		const string* filename = nullptr;

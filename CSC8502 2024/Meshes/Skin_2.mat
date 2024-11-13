@@ -1,0 +1,22 @@
+MeshMat
+1
+3
+4
+Mat_Hair
+2
+Diffuse:/Fantasy knight/Texture/Hair/T_Hair_Alpha.png
+Bump:/Fantasy knight/Texture/Hair/T_Hair_Normals.png
+Mat_Body
+3
+Diffuse:/Fantasy knight/Texture/Body/T_Body_Base_color.tga
+Bump:/Fantasy knight/Texture/Body/T_Body_Normal.tga
+Metallic:/Fantasy knight/Texture/Body/T_Body_MetallicSmoothness.tga
+Mat_Armor_1
+3
+Diffuse:/Fantasy knight/Texture/Armor/T_Armor_Base_color_1.tga
+Bump:/Fantasy knight/Texture/Armor/T_Armor_Normal.tga
+Metallic:/Fantasy knight/Texture/Armor/T_Armor_MetallicSmoothness.tga
+0
+1
+2
+1
