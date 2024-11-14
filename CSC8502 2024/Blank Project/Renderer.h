@@ -2,6 +2,7 @@
 #include "../nclgl/OGLRenderer.h"
 #include "../nclgl/MeshMaterial.h"
 #include "../nclgl/MeshAnimation.h"
+#include "../nclgl/SceneNode.h"
 class Camera;
 class Shader;
 class HeightMap;
@@ -21,6 +22,7 @@ protected:
 	void DrawWater();
 	void DrawSkybox();
 	void DrawFlash();
+	void DrawNode(SceneNode* node);
 	void LoadMesh(Mesh* mesh, MeshMaterial* material);
 	void DrawMesh(Mesh* mesh, MeshMaterial* material, Vector3 meshPosition, Vector3 meshScale, Vector3 meshRotation);
 	
@@ -29,6 +31,9 @@ protected:
 	Mesh* EVA1;
 	MeshMaterial* EVAmat;
 	MeshAnimation* anim;
+	SceneNode* root;
+	SceneNode* evaNode;
+	SceneNode* evaNode2;
 	Shader* Meshshader;	
 	Shader* lightShader;
 	Shader* reflectShader;
@@ -36,7 +41,6 @@ protected:
 	Shader* flashShader;
 	HeightMap* heightMap;
 	Mesh* quad;
-	Light* light;
 	Camera* camera;
 	GLuint cubeMap;
 	GLuint waterTex;
@@ -45,6 +49,7 @@ protected:
 	GLuint waterBump;
 	GLuint daySkybox,nightSkybox;
 	GLuint dayWaterTex, nightWaterTex;
+	GLuint EVATex;
 	Light* dayLight;
 	Light* nightLight;
 	float flashIntensity;      

@@ -8,6 +8,7 @@ SceneNode::SceneNode(Mesh* mesh, Vector4 colour) {
 	boundingRadius = 1.0f;
 	distanceFromCamera = 0.0f;
 	texture = 0;	
+	rotation.ToIdentity();
 }
 SceneNode ::~SceneNode(void) {
 	for (unsigned int i = 0; i < children.size(); ++i) {

@@ -31,6 +31,9 @@ class SceneNode
 	
 	void AddChild(SceneNode * s);
 
+	void SetRotation(const Matrix4& rot) { rotation = rot; }
+	Matrix4 GetRotation() const { return rotation; }
+
 	virtual void Update(float dt);
 	virtual void Draw(const OGLRenderer & r);
 
@@ -60,6 +63,7 @@ class SceneNode
 	Mesh * mesh;
 	Matrix4 worldTransform;
 	Matrix4 transform;
+	Matrix4 rotation;
 	Vector3 modelScale;
 	Vector4 colour;
 	std::vector < SceneNode* > children;

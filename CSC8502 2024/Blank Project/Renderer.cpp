@@ -44,13 +44,35 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	m = Mesh::LoadFromMeshFile("Rock1.msh");
 	mat = new MeshMaterial("Rock1.mat");
 
-	EVA1 = Mesh::LoadFromMeshFile("EVA01.msh");
-	EVAmat = new MeshMaterial("EVA01.mat");
+	EVA1 = Mesh::LoadFromMeshFile("EVAmass.msh");
+	EVAmat = new MeshMaterial("EVAmass.mat");
+	EVATex = SOIL_load_OGL_texture(TEXTUREDIR "e26_201.PNG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS); 
 	//anim = new MeshAnimation("EVA01.anm");
 
 	// Load textures from material file
 	//LoadMesh(m, mat);
-	LoadMesh(EVA1, EVAmat);
+	//LoadMesh(EVA1, EVAmat);
+
+	root = new SceneNode();
+
+	// Create the EVA SceneNode
+	Matrix4 rotation = Matrix4::Rotation(180, Vector3(0, 1, 0));
+
+	evaNode = new SceneNode(EVA1, Vector4(1, 1, 1, 1));  // Using white color for now
+	evaNode->SetModelScale(Vector3(200.0f, 200.0f, 200.0f));    // Adjust scale as needed
+	evaNode->SetTransform(Matrix4::Translation(heightmapSize * Vector3(0.4f, 0.15f, 0.8f)));  // Adjust position
+	evaNode->SetTexture(EVATex); // Set the first submesh texture (if there’s more, we can handle that in rendering)
+	evaNode->SetRotation(rotation);
+	// Add EVA node to the root of the scene graph
+	root->AddChild(evaNode);
+	
+	evaNode2 = new SceneNode(EVA1, Vector4(1, 1, 1, 1));  // Using white color for now
+	evaNode2->SetModelScale(Vector3(200.0f, 200.0f, 200.0f));    // Adjust scale as needed
+	evaNode2->SetTransform(Matrix4::Translation(heightmapSize * Vector3(0.8f, 0.15f, 0.8f)));  // Adjust position
+	evaNode2->SetTexture(EVATex); // Set the first submesh texture (if there’s more, we can handle that in rendering)
+	evaNode2->SetRotation(rotation);
+
+	root->AddChild(evaNode2);
 
 	// Set mesh position on the heightmap
 	/*meshPosition = heightmapSize * Vector3(0.5f, 0.28f, 0.8f);
@@ -90,12 +112,13 @@ Renderer ::~Renderer(void) {
 	delete reflectShader;
 	delete skyboxShader;
 	delete lightShader;
-	delete light;
+	//delete light;
 	delete m;
 	delete mat;
 	delete EVA1;
 	delete EVAmat;
 	delete Meshshader;
+
 }
 
 void Renderer::UpdateScene(float dt) {
@@ -103,7 +126,7 @@ void Renderer::UpdateScene(float dt) {
 	viewMatrix = camera->BuildViewMatrix();
 	waterRotate += dt * 2.0f;
 	waterCycle += dt * 0.25f;
-
+	root->Update(dt);
 	if (isFlashing) {
 		flashIntensity += dt * 2.0f;   // Adjust the multiplier for flash speed
 		if (flashIntensity >= 1.0f) {
@@ -127,9 +150,11 @@ void Renderer::RenderScene() {
 	//DrawMesh(m, mat,heightmapSize * Vector3(0.6f, 0.63f, 0.2f), Vector3(100.0f, 100.0f, 100.0f), Vector3(0, 1, 0));
 	if (change == false)
 	{
-		DrawMesh(EVA1, EVAmat, heightmapSize * Vector3(0.5f, 0.28f, 0.8f), Vector3(100.0f, 100.0f, 100.0f), Vector3(0, 1, 0));
+		//DrawMesh(EVA1, EVAmat, heightmapSize * Vector3(0.4f, 0.28f, 0.8f), Vector3(100.0f, 100.0f, 100.0f), Vector3(0, 1, 0));
+		//DrawMesh(EVA1, EVAmat, heightmapSize * Vector3(0.7f, 0.28f, 0.8f), Vector3(100.0f, 100.0f, 100.0f), Vector3(0, 1, 0));
 		
 	}
+	DrawNode(root);
 	DrawFlash();
 	
 }
@@ -224,7 +249,7 @@ void Renderer::StartFlash() {
 	isFlashing = true;
 }
 
-void Renderer::DrawMesh(Mesh* mesh, MeshMaterial* material, Vector3 meshPosition, Vector3 meshScale, Vector3 meshRotation) {
+/*void Renderer::DrawMesh(Mesh* mesh, MeshMaterial* material, Vector3 meshPosition, Vector3 meshScale, Vector3 meshRotation) {
 	BindShader(lightShader);
 	//UpdateShaderMatrices();
 
@@ -256,5 +281,39 @@ void Renderer::DrawMesh(Mesh* mesh, MeshMaterial* material, Vector3 meshPosition
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, matTextures[i]);
 		mesh->DrawSubMesh(i);
+	}
+} */
+
+void Renderer::DrawNode(SceneNode* node) {
+	if (!node) return;
+	BindShader(lightShader);
+	// Set the model matrix for each node
+
+	modelMatrix = node->GetWorldTransform() * node->GetRotation() * Matrix4::Scale(node->GetModelScale());
+	UpdateShaderMatrices();
+
+	glUniform1i(glGetUniformLocation(Meshshader->GetProgram(), "diffuseTex"), 0);
+	glUniform1i(glGetUniformLocation(lightShader->GetProgram(), "diffuseTex"), 0);
+	glUniform4f(glGetUniformLocation(lightShader->GetProgram(), "ambientLightColor"), 0.7f, 0.6f, 1.0f, 1.0f);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, node->GetTexture());
+
+	if (change == false && (node == evaNode || node == evaNode2))
+	{
+		node->Draw(*this);
+	}
+
+	else if (node != evaNode && node != evaNode2)
+	{
+		node->Draw(*this);
+	}
+	
+	// Bind the texture if available
+
+	  // Draw the mesh of this node
+
+	// Recursively render children nodes
+	for (auto it = node->GetChildIteratorStart(); it != node->GetChildIteratorEnd(); ++it) {
+		DrawNode(*it);
 	}
 }
