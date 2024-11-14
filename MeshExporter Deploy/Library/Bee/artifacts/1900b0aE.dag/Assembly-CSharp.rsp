@@ -334,6 +334,11 @@
 -analyzer:"D:/Unity Editors/Unity 2022.3.5f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"D:/Unity Editors/Unity 2022.3.5f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/MeshExporter.cs"
+"Assets/Supercyan Character Pack Free Sample/Scripts/AccessoryLogic.cs"
+"Assets/Supercyan Character Pack Free Sample/Scripts/AccessoryWearLogic.cs"
+"Assets/Supercyan Character Pack Free Sample/Scripts/DemoFree.cs"
+"Assets/Supercyan Character Pack Free Sample/Scripts/FreeCameraLogic.cs"
+"Assets/Supercyan Character Pack Free Sample/Scripts/SimpleSampleCharacterControl.cs"
 -langversion:9.0
 
 /deterministic

@@ -33,6 +33,7 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	lightShader = new Shader("PerPixelVertex.glsl", "PerPixelFragment.glsl");
 	flashShader = new Shader("fadeVertex.glsl", "fadeFragment.glsl");
 	Meshshader = new Shader("TexturedVertex.glsl", "texturedFragment.glsl");
+	Anmshader = new Shader("SkinningVertex.glsl", "texturedFragment.glsl");
 	if (!reflectShader->LoadSuccess() || !skyboxShader->LoadSuccess() || !lightShader->LoadSuccess() || !Meshshader->LoadSuccess()) {
 		return;
 	}
@@ -43,15 +44,21 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 
 	m = Mesh::LoadFromMeshFile("Rock1.msh");
 	mat = new MeshMaterial("Rock1.mat");
+	RockTex = SOIL_load_OGL_texture(TEXTUREDIR "rocks_gray_small_Albedo.TGA", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 
 	EVA1 = Mesh::LoadFromMeshFile("EVAmass.msh");
 	EVAmat = new MeshMaterial("EVAmass.mat");
-	EVATex = SOIL_load_OGL_texture(TEXTUREDIR "e26_201.PNG", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS); 
+	EVATex = SOIL_load_OGL_texture(TEXTUREDIR "e26_201.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS); 
 	//anim = new MeshAnimation("EVA01.anm");
 
+	Shinji = Mesh::LoadFromMeshFile("shinji1.msh");
+	Shinjimat = new MeshMaterial("shinji1.mat");
+	Shinjianim = new MeshAnimation("shinji1.anm");
+
 	// Load textures from material file
-	//LoadMesh(m, mat);
-	//LoadMesh(EVA1, EVAmat);
+	LoadMesh(m, mat, matTextures);
+	LoadMesh(EVA1, EVAmat,matTextures2);
+	LoadMesh(Shinji, Shinjimat, ShinjiTextures);
 
 	root = new SceneNode();
 
@@ -71,8 +78,22 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	evaNode2->SetTransform(Matrix4::Translation(heightmapSize * Vector3(0.8f, 0.15f, 0.8f)));  // Adjust position
 	evaNode2->SetTexture(EVATex); // Set the first submesh texture (if there’s more, we can handle that in rendering)
 	evaNode2->SetRotation(rotation);
-
 	root->AddChild(evaNode2);
+
+	RockNode = new SceneNode(m, Vector4(1, 1, 1, 1));
+	RockNode->SetModelScale(Vector3(100.0f, 100.0f, 100.0f));    // Adjust scale as needed
+	RockNode->SetTransform(Matrix4::Translation(heightmapSize * Vector3(0.0f, 0.47f, 0.52f)));  // Adjust position
+	RockNode->SetTexture(RockTex); // Set the first submesh texture (if there’s more, we can handle that in rendering)
+	//RockNode->SetRotation(rotation);
+	root->AddChild(RockNode);
+
+
+	ShinNode = new SceneNode(Shinji, Vector4(1, 1, 1, 1));
+	ShinNode->SetModelScale(Vector3(100.0f, 100.0f, 100.0f));    // Adjust scale as needed
+	ShinNode->SetTransform(Matrix4::Translation(heightmapSize * Vector3(0.5f, 0.5f, 0.5f)));  // Adjust position
+	//ShinNode->SetTexture(RockTex); // Set the first submesh texture (if there’s more, we can handle that in rendering)
+	////RockNode->SetRotation(rotation);
+	root->AddChild(ShinNode);
 
 	// Set mesh position on the heightmap
 	/*meshPosition = heightmapSize * Vector3(0.5f, 0.28f, 0.8f);
@@ -91,6 +112,8 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	waterRotate = 0.0f;
 	waterCycle = 0.0f;
 	flashIntensity = 0.0f;
+	currentFrame = 0;
+	frameTime = 0.0f;
 	isFlashing = false;
 	init = true;
 
@@ -112,11 +135,14 @@ Renderer ::~Renderer(void) {
 	delete reflectShader;
 	delete skyboxShader;
 	delete lightShader;
+	delete Anmshader;
 	//delete light;
 	delete m;
 	delete mat;
 	delete EVA1;
 	delete EVAmat;
+	delete Shinji;
+	delete Shinjimat;
 	delete Meshshader;
 
 }
@@ -126,6 +152,11 @@ void Renderer::UpdateScene(float dt) {
 	viewMatrix = camera->BuildViewMatrix();
 	waterRotate += dt * 2.0f;
 	waterCycle += dt * 0.25f;
+	frameTime -= dt;
+	while (frameTime < 0.0f) {
+		currentFrame = (currentFrame + 1) % Shinjianim->GetFrameCount();
+		frameTime += 1.0f / Shinjianim->GetFrameRate();
+	}
 	root->Update(dt);
 	if (isFlashing) {
 		flashIntensity += dt * 2.0f;   // Adjust the multiplier for flash speed
@@ -147,14 +178,8 @@ void Renderer::RenderScene() {
 	DrawSkybox();
 	DrawHeightmap();
 	DrawWater();
-	//DrawMesh(m, mat,heightmapSize * Vector3(0.6f, 0.63f, 0.2f), Vector3(100.0f, 100.0f, 100.0f), Vector3(0, 1, 0));
-	if (change == false)
-	{
-		//DrawMesh(EVA1, EVAmat, heightmapSize * Vector3(0.4f, 0.28f, 0.8f), Vector3(100.0f, 100.0f, 100.0f), Vector3(0, 1, 0));
-		//DrawMesh(EVA1, EVAmat, heightmapSize * Vector3(0.7f, 0.28f, 0.8f), Vector3(100.0f, 100.0f, 100.0f), Vector3(0, 1, 0));
-		
-	}
 	DrawNode(root);
+	//DrawShinji();
 	DrawFlash();
 	
 }
@@ -167,14 +192,10 @@ void Renderer::DrawSkybox() {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, currentSkybox);
 	quad->Draw();
-	/*if (currentSkybox == nightSkybox)
-	{
-		DrawMesh();
-	}*/
 	glDepthMask(GL_TRUE);
 }
 
-void Renderer::LoadMesh(Mesh* mesh, MeshMaterial* material)
+void Renderer::LoadMesh(Mesh* mesh, MeshMaterial* material, std::vector<GLuint>& matTextures)
 {
 	for (int i = 0; i < mesh->GetSubMeshCount(); ++i) {
 		const MeshMaterialEntry* matEntry = material->GetMaterialForLayer(i);
@@ -249,41 +270,6 @@ void Renderer::StartFlash() {
 	isFlashing = true;
 }
 
-/*void Renderer::DrawMesh(Mesh* mesh, MeshMaterial* material, Vector3 meshPosition, Vector3 meshScale, Vector3 meshRotation) {
-	BindShader(lightShader);
-	//UpdateShaderMatrices();
-
-	//vector<Matrix4> frameMatrices;
-	//const Matrix4* invBindPose = mesh->GetInverseBindPose();
-
-	//// Use the first frame for a static pose
-	//const Matrix4* frameData = anim->GetJointData(0);  // First frame only
-
-	//for (unsigned int i = 0; i < mesh->GetJointCount(); ++i) {
-	//	frameMatrices.emplace_back(frameData[i] * invBindPose[i]);
-	//}
-
-	//int j = glGetUniformLocation(Meshshader->GetProgram(), "joints");
-	//glUniformMatrix4fv(j, frameMatrices.size(), false, (float*)frameMatrices.data()); 
-	//glUniformMatrix4fv(glGetUniformLocation(Meshshader->GetProgram(), "textureMatrix"), 1, false, (float*)&textureMatrix);
-	// Set mesh position on the heightmap
-	modelMatrix = Matrix4::Translation(meshPosition) * Matrix4::Scale(meshScale) * Matrix4::Rotation(180, meshRotation);
-	textureMatrix = Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f));
-	UpdateShaderMatrices();
-	
-	glUniform1i(glGetUniformLocation(Meshshader->GetProgram(), "diffuseTex"), 0);
-	//glUniform3fv(glGetUniformLocation(lightShader->GetProgram(), "cameraPos"), 1, (float*)&camera->GetPosition());
-	glUniform1i(glGetUniformLocation(lightShader->GetProgram(), "diffuseTex"), 0);
-	glUniform4f(glGetUniformLocation(lightShader->GetProgram(), "ambientLightColor"), 0.7f, 0.6f, 1.0f, 1.0f);
-
-	// Render each sub-mesh with its texture
-	for (int i = 0; i < mesh->GetSubMeshCount(); ++i) {
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, matTextures[i]);
-		mesh->DrawSubMesh(i);
-	}
-} */
-
 void Renderer::DrawNode(SceneNode* node) {
 	if (!node) return;
 	BindShader(lightShader);
@@ -300,20 +286,57 @@ void Renderer::DrawNode(SceneNode* node) {
 
 	if (change == false && (node == evaNode || node == evaNode2))
 	{
-		node->Draw(*this);
+		for (int i = 0; i < EVA1->GetSubMeshCount(); ++i) {
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, matTextures2[i]);
+			EVA1->DrawSubMesh(i);
+		}
 	}
 
-	else if (node != evaNode && node != evaNode2)
+	else if (node == RockNode)
 	{
-		node->Draw(*this);
+		for (int i = 0; i < m->GetSubMeshCount(); ++i) {
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, matTextures[i]);
+			m->DrawSubMesh(i);
+		}
+		//node->Draw(*this);
+	} 
+	if (node == ShinNode)
+	{
+		DrawShinji();
+		//node->Draw(*this);
 	}
-	
-	// Bind the texture if available
 
-	  // Draw the mesh of this node
-
-	// Recursively render children nodes
 	for (auto it = node->GetChildIteratorStart(); it != node->GetChildIteratorEnd(); ++it) {
 		DrawNode(*it);
 	}
+}
+
+void Renderer::DrawShinji()
+{
+	//glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+	BindShader(Anmshader);
+	modelMatrix = Matrix4::Translation(heightmapSize * Vector3(0.5f, 0.7f, 0.3f)) * Matrix4::Scale(Vector3(100.0f, 100.0f, 100.0f));
+	UpdateShaderMatrices();
+
+	//glUniform1i(glGetUniformLocation(Meshshader->GetProgram(), "diffuseTex"), 0);
+	glUniform1i(glGetUniformLocation(lightShader->GetProgram(), "diffuseTex"), 0);
+	glUniform4f(glGetUniformLocation(lightShader->GetProgram(), "ambientLightColor"), 0.7f, 0.6f, 1.0f, 1.0f);
+	//glUniform1i(glGetUniformLocation(Anmshader->GetProgram(), "diffuseTex"), 0);
+	vector < Matrix4 > frameMatrices;
+	const Matrix4* invBindPose = Shinji->GetInverseBindPose();
+	const Matrix4* frameData = Shinjianim->GetJointData(currentFrame);
+	for (unsigned int i = 0; i < Shinji->GetJointCount(); ++i) {
+		frameMatrices.emplace_back(frameData[i] * invBindPose[i]);
+
+	}
+	int j = glGetUniformLocation(Anmshader->GetProgram(), "joints");
+	glUniformMatrix4fv(j, frameMatrices.size(), false, (float*)frameMatrices.data());
+	for (int i = 0; i < Shinji->GetSubMeshCount(); ++i) {
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, ShinjiTextures[i]);
+		Shinji->DrawSubMesh(i);
+	}
+
 }

@@ -12,9 +12,9 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	if (!shader->LoadSuccess()) {
 		return;
 	}
-	mesh = Mesh::LoadFromMeshFile("MASSEVA1.msh");
-	anim = new MeshAnimation("MASSEVA1.anm");
-	material = new MeshMaterial("MASSEVA1.mat");
+	mesh = Mesh::LoadFromMeshFile("shinji1.msh");
+	anim = new MeshAnimation("shinji1.anm");
+	material = new MeshMaterial("shinji1.mat");
 	for (int i = 0; i < mesh->GetSubMeshCount(); ++i) {
 		const MeshMaterialEntry* matEntry = material->GetMaterialForLayer(i);
 		const string* filename = nullptr;
