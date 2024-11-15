@@ -1,5 +1,5 @@
 ﻿  Renderer.cpp
-D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\Blank Project\Renderer.cpp(105,86): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\Blank Project\Renderer.cpp(105,81): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\Blank Project\Renderer.cpp(335,42): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-  BlankProject.vcxproj -> D:\OpenGLBasics\OpenGL-Basics\CSC8502 2024\x64\Debug\Blank Project.exe
+H:\testprograms\GITREPO\OpenGL-Basics\CSC8502 2024\Blank Project\Renderer.cpp(106,86): warning C4305: 'argument': truncation from 'double' to 'float'
+H:\testprograms\GITREPO\OpenGL-Basics\CSC8502 2024\Blank Project\Renderer.cpp(106,81): warning C4305: 'argument': truncation from 'double' to 'float'
+H:\testprograms\GITREPO\OpenGL-Basics\CSC8502 2024\Blank Project\Renderer.cpp(364,42): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  BlankProject.vcxproj -> H:\testprograms\GITREPO\OpenGL-Basics\CSC8502 2024\x64\Debug\Blank Project.exe

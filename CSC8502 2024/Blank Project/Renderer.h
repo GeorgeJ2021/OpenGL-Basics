@@ -26,7 +26,12 @@ protected:
 	void LoadMesh(Mesh* mesh, MeshMaterial* material, std::vector<GLuint>& matTextures);
 	void DrawMesh(Mesh* mesh, MeshMaterial* material, Vector3 meshPosition, Vector3 meshScale, Vector3 meshRotation);
 	void DrawShinji();
-
+	void DrawRain();
+	
+	
+	std::vector <Vector3> rainPositions;
+	float rainSpeed= 5.0f;
+	Mesh* triangle;
 	Mesh* m;
 	MeshMaterial* mat;
 	Mesh* EVA1;
@@ -42,6 +47,7 @@ protected:
 	SceneNode* ShinNode;
 	Shader* Meshshader;	
 	Shader* lightShader;
+	Shader* rainShader;
 	Shader* reflectShader;
 	Shader* skyboxShader;
 	Shader* flashShader;

@@ -34,6 +34,7 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	flashShader = new Shader("fadeVertex.glsl", "fadeFragment.glsl");
 	Meshshader = new Shader("TexturedVertex.glsl", "texturedFragment.glsl");
 	Anmshader = new Shader("SkinningVertex.glsl", "texturedFragment.glsl");
+	rainShader = new Shader("rainVertex.glsl ", "rainFragment.glsl");
 	if (!reflectShader->LoadSuccess() || !skyboxShader->LoadSuccess() || !lightShader->LoadSuccess() || !Meshshader->LoadSuccess()) {
 		return;
 	}
@@ -104,6 +105,17 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent) {
 	dayLight = new Light(heightmapSize * Vector3(0.5f, 10.0f, 0.5f), Vector4(1.0, 1.0, 1.0, 1), heightmapSize.x * 10.0f);
 	nightLight = new Light(heightmapSize * Vector3(1.0f, 4.0f, 0.5f), Vector4(0.5, 0.6, 0.8, 1), heightmapSize.x * 2.0f);
 
+	triangle = Mesh::GenerateQuad();
+	rainSpeed = 200.0f;
+
+	for (int i = 0; i < 1000; ++i) {
+		rainPositions.push_back(Vector3(
+			static_cast<float>(rand()) / RAND_MAX * heightmapSize.x,
+			static_cast<float>(rand()) / RAND_MAX * 600.0f + 600.0f,
+			static_cast<float>(rand()) / RAND_MAX * heightmapSize.z
+		));
+	}
+
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
@@ -157,6 +169,18 @@ void Renderer::UpdateScene(float dt) {
 		currentFrame = (currentFrame + 1) % Shinjianim->GetFrameCount();
 		frameTime += 1.0f / Shinjianim->GetFrameRate();
 	}
+
+	for (auto& pos : rainPositions) {
+		pos.y -= rainSpeed * dt;
+
+
+		if (pos.y < 0.0f) {
+			pos.y = static_cast<float>(rand()) / RAND_MAX * 600.0f + 600.0f;
+			pos.x = static_cast<float>(rand()) / RAND_MAX * heightmapSize.x;
+			pos.z = static_cast<float>(rand()) / RAND_MAX * heightmapSize.z;
+		}
+	}
+
 	root->Update(dt);
 	if (isFlashing) {
 		flashIntensity += dt * 2.0f;   // Adjust the multiplier for flash speed
@@ -181,6 +205,11 @@ void Renderer::RenderScene() {
 	DrawNode(root);
 	//DrawShinji();
 	DrawFlash();
+	if (change == false)
+	{
+		DrawRain();
+	}
+	
 	
 }
 
@@ -337,6 +366,25 @@ void Renderer::DrawShinji()
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, ShinjiTextures[i]);
 		Shinji->DrawSubMesh(i);
+	}
+
+}
+
+void Renderer::DrawRain() {
+	BindShader(rainShader);
+	glUniform1f(glGetUniformLocation(rainShader->GetProgram(), "ambientStrength"), 0.8f);
+	glUniform3fv(glGetUniformLocation(rainShader->GetProgram(), "lightColor"), 1, (float*)&nightLight->GetColour());
+
+	//glViewport(0, 0, width / 2, height);
+	glUniformMatrix4fv(glGetUniformLocation(rainShader->GetProgram(), "viewMatrix"), 1, false, (float*)&camera->BuildViewMatrix());
+	glUniformMatrix4fv(glGetUniformLocation(rainShader->GetProgram(), "projMatrix"), 1, false, projMatrix.values);
+
+
+	for (const auto& pos : rainPositions) {
+		modelMatrix = Matrix4::Translation(pos) * Matrix4::Scale(Vector3(5.0f, 5.0f, 5.0f));
+		glUniformMatrix4fv(glGetUniformLocation(rainShader->GetProgram(), "modelMatrix"), 1, false, modelMatrix.values);
+
+		triangle->Draw();
 	}
 
 }
